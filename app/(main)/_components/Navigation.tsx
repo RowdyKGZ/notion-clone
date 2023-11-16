@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
 import { usePathname } from "next/navigation";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import { useQuery, useMutation } from "convex/react";
+import { useMutation } from "convex/react";
 import {
   ChevronsLeft,
   MenuIcon,
@@ -14,14 +14,14 @@ import {
 import { ElementRef, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { UserItem } from "./User-item";
+import { UserItem } from "./UserItem";
 import { api } from "@/convex/_generated/api";
 import { Item } from "./Item";
+import { DocumentList } from "./DocumentList";
 
 export const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
 
   const isResizingRef = useRef(false);
@@ -159,10 +159,10 @@ export const Navigation = () => {
           <Item onClick={onCreate} label="New Page" icon={PlusCircle} />
         </div>
         <div className="mt-4">
-          {documents?.map((document) => (
-            <p key={document._id}>{document.title}</p>
-          ))}
+          <DocumentList />
         </div>
+
+        {/* mouse movement */}
         <div
           onMouseDown={handleMouseDown}
           onClick={resetWidth}
@@ -170,6 +170,7 @@ export const Navigation = () => {
         />
       </aside>
 
+      {/* Menus when hidden */}
       <div
         ref={navbarRef}
         className={cn(
