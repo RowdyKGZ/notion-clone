@@ -21,7 +21,7 @@ interface SpinnerProps extends VariantProps<typeof spinnerVariants> {}
 
 export const Spinner = ({ size }: SpinnerProps) => {
   return (
-    <div className="w-full flex justify-center items-center">
+    <div className="w-full flex justify-center items-center p-4">
       <Loader className={cn(spinnerVariants({ size }))} />
     </div>
   );

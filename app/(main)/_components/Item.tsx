@@ -32,7 +32,7 @@ interface ItemProps {
   level?: number;
   onExpand?: () => void;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   icon: LucideIcon;
 }
 
@@ -51,6 +51,7 @@ export const Item = ({
   const { user } = useUser();
   const router = useRouter();
   const create = useMutation(api.documents.create);
+  const archive = useMutation(api.documents.archive);
 
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
@@ -77,6 +78,20 @@ export const Item = ({
       loading: "Creating a new note...",
       success: "New note create!",
       error: "Failed to create a new note",
+    });
+  };
+
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (!id) return;
+
+    const promise = archive({ id });
+
+    toast.promise(promise, {
+      loading: "Moving to trash...",
+      success: "Note move to trash",
+      error: "Failed to archive note",
     });
   };
 
@@ -135,7 +150,7 @@ export const Item = ({
               side="right"
               forceMount
             >
-              <DropdownMenuItem onClick={() => {}}>
+              <DropdownMenuItem onClick={onArchive}>
                 <Trash className="h-4 w-4 mr-2" />
                 Delete
               </DropdownMenuItem>
