@@ -28,7 +28,7 @@ export const UserItem = () => {
             </Avatar>
 
             <span className="text-start font-medium line-clamp-1">
-              {user?.fullName} Jotion
+              {user?.fullName} Note
             </span>
           </div>
 
@@ -55,7 +55,7 @@ export const UserItem = () => {
             </div>
 
             <div className="space-y-1">
-              <p className="text-sm line-clamp-1">{user?.fullName} Jotion</p>
+              <p className="text-sm line-clamp-1">{user?.fullName} Note</p>
             </div>
           </div>
         </div>
