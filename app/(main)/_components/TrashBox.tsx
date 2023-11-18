@@ -10,7 +10,7 @@ import { api } from "@/convex/_generated/api";
 import { Spinner } from "@/components/spinner";
 import { Id } from "@/convex/_generated/dataModel";
 import { Input } from "@/components/ui/input";
-import { ConfirmModal } from "@/components/modals/confirmModal";
+import { ConfirmModal } from "@/components/modals/ConfirmModal";
 
 export const TrashBox = () => {
   const router = useRouter();
@@ -26,7 +26,7 @@ export const TrashBox = () => {
   );
 
   const onClick = (documentId: string) => {
-    router.push(`documents//${documentId}`);
+    router.push(`/documents/${documentId}`);
   };
 
   const onRestore = (

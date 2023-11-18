@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { TrashBox } from "./TrashBox";
 import { useMutation } from "convex/react";
 import { useMediaQuery } from "usehooks-ts";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import {
@@ -18,6 +18,7 @@ import {
 
 import { Item } from "./Item";
 import { cn } from "@/lib/utils";
+import { Navbar } from "./Navbar";
 import { UserItem } from "./UserItem";
 import { api } from "@/convex/_generated/api";
 import { DocumentList } from "./DocumentList";
@@ -30,6 +31,7 @@ import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-setting";
 
 export const Navigation = () => {
+  const params = useParams();
   const { onOpen } = useSettings();
   const search = useSearch();
   const pathname = usePathname();
@@ -205,14 +207,18 @@ export const Navigation = () => {
           isMobile && "left-0 w-full"
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full">
-          {isCollapse && (
-            <MenuIcon
-              onClick={resetWidth}
-              className="h-6 w-6 text-muted-foreground"
-            />
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navbar isCollapse={isCollapse} onResetWidth={resetWidth} />
+        ) : (
+          <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapse && (
+              <MenuIcon
+                onClick={resetWidth}
+                className="h-6 w-6 text-muted-foreground"
+              />
+            )}
+          </nav>
+        )}
       </div>
     </>
   );
