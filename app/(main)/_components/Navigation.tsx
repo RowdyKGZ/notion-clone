@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { TrashBox } from "./TrashBox";
 import { useMutation } from "convex/react";
 import { useMediaQuery } from "usehooks-ts";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import {
@@ -31,6 +31,7 @@ import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-setting";
 
 export const Navigation = () => {
+  const router = useRouter();
   const params = useParams();
   const { onOpen } = useSettings();
   const search = useSearch();
@@ -123,7 +124,9 @@ export const Navigation = () => {
   };
 
   const handleCreate = () => {
-    const promise = create({ title: "Untitled" });
+    const promise = create({ title: "Untitled" }).then((documentId) => {
+      router.push(`/documents/${documentId}`);
+    });
 
     toast.promise(promise, {
       loading: "Creating a new note...",

@@ -101,47 +101,20 @@
 // };
 
 // console.log(maxFrequency([1, 2, 4], 5));
-var reductionOperations = function (nums) {
-  let sortArr = nums.sort((a, b) => b - a);
-  const minNum = Math.min(...nums);
+// var reductionOperations = function (nums) {
+//   let sortArr = nums.sort((a, b) => b - a);
+//   const minNum = Math.min(...nums);
 
-  let result = 0;
+//   let el = 0;
 
-  let cur = 0;
-  let next = 1;
+//   let total = 0;
 
-  console.log(sortArr);
-  while (cur < nums.length) {
-    if (sortArr[next] === minNum) {
-      result++;
-      break;
-    }
+//   console.log(sortArr, "sort");
 
-    let res = sortArr[cur] - sortArr[next];
+//   while (nums[el] > minNum) {
+//     total += nums[el] - 1;
+//     el++;
+//   }
 
-    if (res === 0) {
-      result++;
-      cur++;
-      next++;
-    }
-
-    if (res < minNum) {
-      result += 2;
-      cur++;
-      next++;
-    } else {
-      cur++;
-      next++;
-    }
-  }
-
-  if (result === 1) {
-    return 0;
-  }
-
-  return result;
-};
-
-console.log(reductionOperations([1, 1, 2, 2, 3]), "return");
-console.log(reductionOperations([5, 1, 3]));
-console.log(reductionOperations([1, 1, 1]));
+//   return total;
+// };
