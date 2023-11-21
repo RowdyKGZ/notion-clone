@@ -1,8 +1,6 @@
 // var minPairSum = function (nums) {
 //   nums = nums.sort((a, b) => a - b);
 
-const { error, log } = require("console");
-
 //   console.log(nums);
 //   let firstMarker = 0;
 //   let lastMarker = nums.length - 1;
@@ -90,16 +88,60 @@ const { error, log } = require("console");
 
 // maxFrequency([1, 4, 8, 13], 5);
 
-var maxFrequency = function (nums, k) {
-  let sum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (k > nums[i]) {
-      console.log("a");
-      sum++;
+// var maxFrequency = function (nums, k) {
+//   let sum = 0;
+//   for (let i = 0; i < nums.length; i++) {
+//     if (k > nums[i]) {
+//       console.log("a");
+//       sum++;
+//     }
+//   }
+
+//   return sum;
+// };
+
+// console.log(maxFrequency([1, 2, 4], 5));
+var reductionOperations = function (nums) {
+  let sortArr = nums.sort((a, b) => b - a);
+  const minNum = Math.min(...nums);
+
+  let result = 0;
+
+  let cur = 0;
+  let next = 1;
+
+  console.log(sortArr);
+  while (cur < nums.length) {
+    if (sortArr[next] === minNum) {
+      result++;
+      break;
+    }
+
+    let res = sortArr[cur] - sortArr[next];
+
+    if (res === 0) {
+      result++;
+      cur++;
+      next++;
+    }
+
+    if (res < minNum) {
+      result += 2;
+      cur++;
+      next++;
+    } else {
+      cur++;
+      next++;
     }
   }
 
-  return sum;
+  if (result === 1) {
+    return 0;
+  }
+
+  return result;
 };
 
-console.log(maxFrequency([1, 2, 4], 5));
+console.log(reductionOperations([1, 1, 2, 2, 3]), "return");
+console.log(reductionOperations([5, 1, 3]));
+console.log(reductionOperations([1, 1, 1]));
