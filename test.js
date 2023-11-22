@@ -118,3 +118,17 @@
 
 //   return total;
 // };
+
+var repeatedNTimes = function (nums) {
+  nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      return nums[i];
+    }
+  }
+};
+
+console.log(repeatedNTimes((nums = [1, 2, 3, 3])));
+console.log(repeatedNTimes((nums = [2, 1, 2, 5, 3, 2])));
+console.log(repeatedNTimes((nums = [5, 1, 5, 2, 5, 3, 5, 4])));

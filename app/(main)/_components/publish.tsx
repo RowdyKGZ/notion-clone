@@ -75,6 +75,7 @@ export const Publish = ({ initialData }: PublishProps) => {
           )}
         </Button>
       </PopoverTrigger>
+
       <PopoverContent className="w-72" align="end" alignOffset={8} forceMount>
         {initialData.isPublish ? (
           <div className="space-y-4">
@@ -103,6 +104,15 @@ export const Publish = ({ initialData }: PublishProps) => {
                 )}
               </Button>
             </div>
+
+            <Button
+              size="sm"
+              className="w-full text-sm"
+              disabled={isSubmitting}
+              onClick={onUnPublish}
+            >
+              Unpublish
+            </Button>
           </div>
         ) : (
           <div className="felx flex-col items-center justify-center">
